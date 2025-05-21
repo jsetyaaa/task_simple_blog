@@ -1,41 +1,57 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Edit Post') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+        <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="post" action="#" class="space-y-6">
+                        <form method="post" action="{{ route('posts.update', $post) }}" class="space-y-6">
+                            @csrf
+                            @method('put')
+
+                            {{-- Title --}}
                             <div>
                                 <x-input-label for="title" :value="__('Title')" />
-                                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-text-input id="title" name="title" type="text" class="block w-full mt-1"
+                                    value="{{ old('title', $post->title) }}" required />
+                                <x-input-error :messages="$errors->get('title')" class="mt-2" />
                             </div>
 
+                            {{-- Content --}}
                             <div>
                                 <x-input-label for="content" :value="__('Content')" />
-                                <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="6"></textarea>
-                                <x-input-error :messages="''" class="mt-2" />
+                                <textarea id="content" name="content"
+                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    rows="6" required>{{ old('content', $post->content) }}</textarea>
+                                <x-input-error :messages="$errors->get('content')" class="mt-2" />
                             </div>
 
+                            {{-- Publish Date --}}
                             <div>
                                 <x-input-label for="published_at" :value="__('Publish Date')" />
-                                <x-text-input id="published_at" name="published_at" type="date" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-text-input id="published_at" name="published_at" type="date"
+                                    class="block w-full mt-1"
+                                    value="{{ old('published_at', optional($post->published_at)->format('Y-m-d')) }}" />
+                                <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                             </div>
 
+                            {{-- Status --}}
                             <div>
-                                <label for="is_draft" class="inline-flex items-center">
-                                    <input id="is_draft" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_draft">
-                                    <span class="ms-2 text-sm text-gray-600">{{ __('Save as Draft') }}</span>
-                                </label>
+                                <x-input-label for="status" :value="__('Status')" />
+                                <select id="status" name="status" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                                    <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }}>Draft</option>
+                                    <option value="scheduled" {{ old('status', $post->status) === 'scheduled' ? 'selected' : '' }}>Scheduled</option>
+                                    <option value="published" {{ old('status', $post->status) === 'published' ? 'selected' : '' }}>Published</option>
+                                </select>
+                                <x-input-error :messages="$errors->get('status')" class="mt-2" />
                             </div>
 
+                            {{-- Submit --}}
                             <div class="flex items-center gap-4">
                                 <x-primary-button>{{ __('Update') }}</x-primary-button>
                             </div>
