@@ -7,11 +7,9 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::resource('posts', PostController::class)->except('show')->middleware('auth');
 
-
-Route::resource('posts', PostController::class)->except('index', 'show')->middleware('auth');
-
-Route::resource('posts', PostController::class)->only('index', 'show');
+Route::resource('posts', PostController::class)->only('show');
 
 Route::get('/cek-timezone', function () {
     return now()->toDateTimeString();

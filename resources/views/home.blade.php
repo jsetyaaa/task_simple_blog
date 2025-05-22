@@ -41,6 +41,10 @@
                                     <span>{{ $post->user->name }}</span>
                                 </div>
                                 <div class="flex items-center gap-2">
+                                    <span
+                                        class="flex-none px-2 py-1 text-green-800 capitalize bg-green-100 rounded">
+                                        {{ $post->status }}
+                                    </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="size-4 fill-gray-500">
                                         <path

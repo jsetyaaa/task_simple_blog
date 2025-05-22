@@ -15,19 +15,19 @@
                             <div>
                                 <x-input-label for="title" :value="__('Title')" />
                                 <x-text-input id="title" name="title" type="text" class="block w-full mt-1" />
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-input-error :messages="$errors->get('title')" class="mt-2" />
                             </div>
 
                             <div>
                                 <x-input-label for="content" :value="__('Content')" />
                                 <textarea id="content" name="content" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="6"></textarea>
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-input-error :messages="$errors->get('content')" class="mt-2" />
                             </div>
 
                             <div>
                                 <x-input-label for="published_at" :value="__('Publish Date')" />
                                 <x-text-input id="published_at" name="published_at" type="datetime-local" class="block w-full mt-1" value="{{ old('published_at', isset($post) ? $post->published_at->format('Y-m-d\TH:i') : '') }}"/>
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                             </div>
 
                             <div>

@@ -31,4 +31,15 @@ class UpdatePostRequest extends FormRequest
             'status' => ['required', 'in:draft,scheduled,published'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'The title field is required.',
+            'content.required' => 'The content field is required.',
+            'status.required' => 'The status field is required.',
+            'published_at.required' => 'The published_at field is required.',
+            'title.max' => 'The title must not exceed 60 characters.',
+        ];
+    }
 }
