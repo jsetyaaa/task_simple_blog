@@ -26,7 +26,7 @@
 
                             <div>
                                 <x-input-label for="published_at" :value="__('Publish Date')" />
-                                <x-text-input id="published_at" name="published_at" type="datetime-local" class="block w-full mt-1" value="{{ old('published_at', isset($post) ? $post->published_at->format('Y-m-d\TH:i') : '') }}"/>
+                                <x-text-input id="published_at" name="published_at" type="datetime-local" class="block w-full mt-1"/>
                                 <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                             </div>
 

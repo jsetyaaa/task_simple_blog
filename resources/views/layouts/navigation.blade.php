@@ -16,13 +16,13 @@
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
-
-                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ __('My Posts') }}
+                        {{ __('Post Listing') }}
                     </x-nav-link>
                 </div>
+
+                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
                         {{ __('Create New Post') }}

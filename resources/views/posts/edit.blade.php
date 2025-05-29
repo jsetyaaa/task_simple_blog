@@ -34,21 +34,20 @@
                             {{-- Publish Date --}}
                             <div>
                                 <x-input-label for="published_at" :value="__('Publish Date')" />
-                                <x-text-input id="published_at" name="published_at" type="date"
-                                    class="block w-full mt-1"
-                                    value="{{ old('published_at', optional($post->published_at)->format('Y-m-d')) }}" />
+                                <x-text-input id="published_at" name="published_at" type="datetime-local"
+                                    class="block w-full mt-1" value="{{ old('created_at', isset($post) ? $post->created_at->format('Y-m-d\TH:i') : '') }}"/>
                                 <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
                             </div>
 
-                            {{-- Status --}}
                             <div>
-                                <x-input-label for="status" :value="__('Status')" />
-                                <select id="status" name="status" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
-                                    <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }}>Draft</option>
-                                    <option value="scheduled" {{ old('status', $post->status) === 'scheduled' ? 'selected' : '' }}>Scheduled</option>
-                                    <option value="published" {{ old('status', $post->status) === 'published' ? 'selected' : '' }}>Published</option>
-                                </select>
-                                <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                                <div>
+                                    <label for="is_draft" class="inline-flex items-center">
+                                        <input id="is_draft" type="checkbox" value="1"
+                                            class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500"
+                                            name="is_draft">
+                                        <span class="text-sm text-gray-600 ms-2">{{ __('Save as Draft') }}</span>
+                                    </label>
+                                </div>
                             </div>
 
                             {{-- Submit --}}

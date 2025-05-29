@@ -25,10 +25,16 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:60'],
             'content' => ['required', 'string'],
-            'published_at' => ['nullable', 'date'],
-            'status' => ['required', 'in:draft,scheduled,published'],
+            'status' => ['nullable', Rule::in(['draft', 'scheduled', 'published'])],
+            'published_at' => [
+                'nullable',
+                'date',
+                Rule::requiredIf(function () {
+                    return in_array($this->input('status'), ['scheduled', 'published']);
+                }),
+            ],
         ];
     }
 

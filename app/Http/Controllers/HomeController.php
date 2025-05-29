@@ -11,10 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('status', 'published')
-                ->latest()
-                ->with('user')
-                ->paginate(5);
+        $posts = Post::where('user_id', Auth::id())->latest()->paginate(5);
 
 
         return view('home', compact('posts'));

@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id', Auth::id())->paginate(5);
+        $posts = Post::where('status', 'published')->latest('published_at')->paginate(5);
 
         return view('posts.index', compact('posts'));
     }
@@ -42,7 +42,7 @@ class PostController extends Controller
 
         Post::create($validated);
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        return redirect()->route('home')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+        return redirect()->route('home')->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -85,7 +85,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
         $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+        return redirect()->route('home')->with('success', 'Post deleted successfully.');
     }
 
     private function determineStatus(array &$data): void

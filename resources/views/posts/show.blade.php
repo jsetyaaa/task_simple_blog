@@ -38,7 +38,7 @@
                     </div>
                 </section>
             </div>
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-blue-500">
+            <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-blue-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
                     class="size-4 fill-blue-500"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
